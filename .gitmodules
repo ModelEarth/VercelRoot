@@ -1,6 +1,6 @@
 [submodule "auth"]
 	path = auth
-	url = https://github.com/ModelEarth/auth
+	url = https://github.com/modelearth/auth
 	branch = main
 [submodule "chat"]
 	path = chat
@@ -12,11 +12,11 @@
 	branch = main
 [submodule "keys"]
 	path = keys
-	url = https://github.com/ModelEarth/keys
+	url = https://github.com/modelearth/keys
 	branch = main
 [submodule "know"]
 	path = know
-	url = https://github.com/ModelEarth/know
+	url = https://github.com/modelearth/know
 	branch = main
 [submodule "localsite"]
 	path = localsite
@@ -25,4 +25,8 @@
 [submodule "requests"]
 	path = requests
 	url = https://github.com/modelearth/requests
+	branch = main
+[submodule "trade"]
+	path = trade
+	url = https://github.com/modelearth/trade
 	branch = main
