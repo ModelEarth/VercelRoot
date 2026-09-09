@@ -1,6 +1,11 @@
 # CloudRoot
 
-A webroot for Cloudflare, [Netlify](https://www.netlify.com/) and Vercel using [opennext.js](https://opennext.js.org) for NextJS.
+A webroot for Cloudflare, [Netlify](https://www.netlify.com/) and Vercel.
+
+The chat submodule deploys to Vercel directly. [opennext.js](https://opennext.js.org)
+is included for Cloudflare Workers deployment but is not currently in use for
+chat, since its Cloudflare adapter does not support the Node runtime that
+Next.js 16 requires for proxy files.
 
 NodeJS resides in "chat" submodule.
 
@@ -15,6 +20,27 @@ Launch site, each time (port can be changed):
 
 Site comes up at http://localhost:3700
 
+## Submodules
+
+| Submodule | Purpose |
+|---|---|
+| `chat` | The Next.js application. Deploys to Vercel. |
+| `auth` | Standalone sign-in app, shared across frontends |
+| `keys` | API key management interface |
+| `know` | Trade map and knowledge base pages |
+| `requests` | Arts engine and request handling |
+| `feed` | Feed player React app |
+| `localsite` | Shared navigation and map scripts |
+| `trade` | Trade data |
+
+## Worker
+
+The `worker/` folder holds a Cloudflare Worker that keeps LLM API keys
+server-side and exposes a single `/api/chat` endpoint, so frontend code never
+handles a key directly. GitHub Actions deploys it and pushes keys from GitHub
+Secrets into Cloudflare Secrets.
+
+See [worker/README.md](worker/README.md) for setup, secrets and deployment.
 ## Status: Working ✅
 
 The chat submodule deploys successfully on Vercel:  
@@ -69,7 +95,7 @@ version. So a minimal root `package.json` is still required, containing:
   drifted out of sync, rather than silently breaking. Ignores pnpm's
   integrity hash suffix when comparing versions.
 
-## Note
+## Note on webroot
 
 This same root cause likely affects the full webroot repo, which also has no
 root-level `package.json`.
